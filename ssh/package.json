@@ -1,0 +1,83 @@
+{
+  "name": "copy-link-companion",
+  "displayName": "Copy Link Companion",
+  "description": "Companion to copy-link for VS Code Server",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rkhat/vscode-copy-link"
+  },
+  "keywords": [
+    "copy",
+    "copy link",
+    "paste",
+    "paste link",
+    "move link",
+    "symlink"
+  ],
+  "icon": "resources/icon.png",
+  "galleryBanner": {
+    "color": "#ffba6d",
+    "theme": "light"
+  },
+  "publisher": "rkhat",
+  "author": {
+    "name": "Rami Elkhatib",
+    "email": "r2elkhatib@gmail.com"
+  },
+  "extensionKind": ["ui"],
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "copyLinkCompanion.getHost",
+          "when": "false"
+        },
+        {
+          "command": "copyLinkCompanion.getWorkspace",
+          "when": "false"
+        },
+        {
+          "command": "copyLinkCompanion.getClipboard",
+          "when": "false"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "copyLinkCompanion.getHost",
+        "title": "CopyLinkCompanion: Get Host"
+      },
+      {
+        "command": "copyLinkCompanion.getWorkspace",
+        "title": "CopyLinkCompanion: Get Workspace"
+      },
+      {
+        "command": "copyLinkCompanion.getClipboard",
+        "title": "CopyLinkCompanion: Get Clipboard"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/node": "20.x",
+    "@types/vscode": "^1.90.0",
+    "@typescript-eslint/eslint-plugin": "^7.11.0",
+    "@typescript-eslint/parser": "^7.11.0",
+    "eslint": "^8.57.0",
+    "typescript": "^5.4.5"
+  }
+}
