@@ -1,6 +1,5 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
-import * as fs from 'fs/promises';
 import { checkUriContained, relativeLink, readClipboard, fileWritable } from './utils';
 import { COMPANION_GET_WORKSPACE_ID, COMPANION_GET_CLIPBOARD_ID} from './companion';
 
@@ -16,17 +15,25 @@ async function getHostWorkspace(): Promise<vscode.Uri> {
   if (vscode.env.remoteName === undefined) {
     return getLocalWorkspace();
   }
-  const uriStr: string = await vscode.commands.executeCommand(COMPANION_GET_WORKSPACE_ID);
-  const uri = vscode.Uri.parse(uriStr, true);
-  return uri;
+  try {
+    const uriStr: string = await vscode.commands.executeCommand(COMPANION_GET_WORKSPACE_ID);
+    const uri = vscode.Uri.parse(uriStr, true);
+    return uri;
+  } catch {
+    throw new Error("Error: Companion extension not found. Please install 'Copy Link Companion'.");
+  }
 }
 
 async function getClipboardSources(): Promise<string[]> {
   if (vscode.env.remoteName === undefined) {
     return await readClipboard();
   }
-  const files: string[] = await vscode.commands.executeCommand(COMPANION_GET_CLIPBOARD_ID);
-  return files;
+  try {
+    const files: string[] = await vscode.commands.executeCommand(COMPANION_GET_CLIPBOARD_ID);
+    return files;
+  } catch {
+    throw new Error("Error: Companion extension not found. Please install 'Copy Link Companion'.");
+  }
 }
 
 async function getDestDir(uri: vscode.Uri): Promise<string> {
@@ -68,5 +75,6 @@ export const pasteRelLink  = async (destDirUri: vscode.Uri) => {
     }
   } catch (e: any) {
     vscode.window.showErrorMessage(e.message);
+    throw e;
   }
 };

@@ -2,7 +2,7 @@
   "name": "copy-link",
   "displayName": "Copy Link",
   "description": "Creates symbolic links to files/directories in file explorer",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "repository": {
     "type": "git",
     "url": "https://github.com/rkhat/vscode-copy-link"

@@ -16,7 +16,6 @@ export async function readClipboard (): Promise<string[]> {
       return [];
     }
   } else {
-    // Unreachable code because of the platform check in activate function.
-    throw new Error("Error: Unsupported platform.");
+    throw new Error("Error: Unsupported platform. Only Linux is supported.");
   }
 }
